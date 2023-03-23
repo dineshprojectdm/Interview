@@ -1,0 +1,329 @@
+1. How will you monitor the server health check
+
+* top -  [To check CPU and MEMORY]
+* top command fields explanation
+================================================================================
+# top - Fields of Top command
+================================================================================
+top - 15:33:31 up  2:48,  3 users,  load average: 0.00, 0.00, 0.00
+Tasks:  84 total,   2 running,  82 sleeping,   0 stopped,   0 zombie
+Cpu(s):  0.3%us,  0.0%sy,  0.0%ni, 99.0%id,  0.7%wa,  0.0%hi,  0.0%si,  0.0%st
+Mem:    515524k total,   273852k used,   241672k free,    29448k buffers
+Swap:  1048568k total,        0k used,  1048568k free,   187024k cached
+==================================================================================
+First field : Current time | Server up time | No. of users | server load avg for last 1, 5, 15 mins
+
+Task : Tot no. of task | Running task | Sleeping | Stopped | Zombie
+
+CPU  : 
+
+Mem  : Total memory | Mem Used | Mem Free | Buffers
+
+Swap : Total memory | Mem Used | Mem Free | Cached
+------------------------------------------------------------------------
+* ps -ef - [Process Running]
+  ps -ef
+
+* free -m  - [To check memory details RAM/SWAP
+ 
+* vmstat   -  [To check Virtual memory status]
+
+* iostat   -  [To check i/o status of server - How much data reading and writting]
+
+* netstat  -  [network statistics] [To netstat -atnlp - To check service ] - PORT LISTENING
+
+
+----------------------
+2. What are RUN level in linux.
+
+/etc/inittab
+
+0 - Halt
+1 - Single user mode
+2 - Multi user mode without NFS
+3 - Full multi user mode 
+4 - Unused - Not used/User-definable
+5 - X11 GUI
+6 - Reboot 
+
+id : 3 - By default id will be 5 and we have to change it to Id : 3
+
+
+etc/init.d/rc3.d
+
+-------------------------------------
+2. How will you create LV
+
+   LVM : definition
+
+>>> There are some steps to create LV 1st I will the
+
+    1. pvcreate   /dev/hdb
+    2. pvs
+    3. vgcreate sky4GBvg(new vgname)  /dev/hdb
+    4. vgs
+    5. lvcreate  sky4GBvg(VG name) -L 4GB -n sky4GBlv(New LV name)
+    6. lvs or lvdisplay
+    7. mkfs.ext3 /dev/sky4GBvg/sky4GBlv(LV name) -  [Formatting]
+    8. mount /dev/sky4GBvg/sky4GBlv   /sky 
+    9. cat /etc/fstab
+    10.vi etc/fstab  
+    11.df -h - [Mounted]
+
+--------------------------------------------------
+3.How will you add a user and How will add a user to group
+
+>> # useradd username
+>> # usermod –a -G groupname username  
+--------------------------------------------------
+
+4. What are the fields of /etc/passwd  file
+
+>>> username : Pointer towards password : UID : GID : comment section : Home dir : Shell
+
+--------------------------------------------------
+
+5. what is group
+
+>>> Group is a collection of users
+
+--------------------------------------------------
+6. How to creat a Group
+
+>>> groupadd groupname
+--------------------------------------------------
+7. How to add user to a Group
+
+>># usermod –a -G groupname username 
+--------------------------------------------------
+8. How to Lock a user
+
+>> #usermod -L username
+--------------------------------------------------
+9. What you ll do if user not able to Log in
+
+>> ping
+>> First I ll check myself whether able to login or not as a user If not then
+>> Then I ll check whether user exist or not by <Cat  /etc/passwd> and grep the user
+>> If user exist then I ll check whether user is Locked or not in no log in
+>> Expiriey date
+>> /var/log/secure  - and check what error its showing, Based on that i will solve 
+----------------------------------------------------------------
+
+10. What you ll do if LVM is not detecting ?
+
+>> lvscan, vgscan, pvscan.
+and ther is a command/Script
+>>> echo "- - -" > /sys/class/scsi_host/host0/scan
+
+----------------------------------------------------------
+
+11. What is SSH and its port
+
+>>> SSH is secured shell used to connect LINUX Machine remotly. Runs in a port 22
+    It is so called secured because packates are transfering in secure maner rather than
+    plain text
+
+/etc/ssh/sshd_config
+
+--------------------------------------------------------
+
+12. What you ll do if you not able to log in SSH
+
+>>> ping
+>>> I will take server console,
+In Physical i will check in ILO(Integrated Lights out)
+In VMware I will check in VM console
+>>> Now I will check service is running "Service sshd status"
+>> Will check disk usage because sometimes /var is full it will not login
+
+-----------------------------------------------------------
+13. How you ll connet SSH without a password
+
+>>> By sharing the SSH keys between the servers 
+
+>>> Steps for Keygen
+
+# ssh-keygen
+# ssh-copy-id  -i  /root/.ssh/id_rsa.pub   192.168.81.20
+-----------------------------------------------------------
+
+14. How do you create YUM Repository
+
+>>> Before Creating YUM repository (FTP and vsftpd) must installed in server
+>>> Copy all rpm packages in /var/ftp/pub
+>>> After instaling go to /var/ftp/pub/ - Here only we are creating yum repository
+>>> rpm -ivh  createrepo-0.4.4-2.fc6.noarch.rpm
+>>> createrepo  -v  .
+>>> cd    /etc/yum.repos.d/ 
+
+[my repo]
+baseurl=file:///var/ftp/pub
+enabled=1
+gpgcheck=0
+
+
+-------------------------------------------------------------------
+15. How will you install package
+
+>>> If ther is no yum repository the rpm -ivh package name
+>>> If Yum repository then Yum install packagename
+
+YUM : Yum resolves dependencies
+RPM : Will not
+
+---------------------------------------------------------------------
+
+16. What is FTP
+
+>>> FTP is a File transfer protocol. it is a standard Internet protocol for "transmitting" files between
+a client and server on a computer network over TCP/IP connections. Using FTP, a client can upload,
+download, delete, rename, move and copy files on a server.
+
+Port number : 20 21
+package name : vsftpd
+configuration file : /etc/vsftpd/vsftpd.conf
+service : vsftpd
+-------------------------------------------
+
+17 . what is NFS  (shared folder) - Port 2049
+
+>>>NFS is Network File System, It is to share file over the network.
+   The Network File System (NFS) is a way of mounting Linux discs/directories over a network. 
+   linux os... 
+---------------------------------------------------
+18. what is default permission for /tmp
+
+777 
+----------------------------------------------------
+19. what is LDAP and active directory
+
+(Windows) Active Directory : Its a directory service which contains information of all
+user accounts, Groups, Computer and networks resourses
+
+(Linux) Ldap : 
+
+---------------------------------------------
+20. What is IPtables
+
+>>> Iptables is like firewall for Linux. It controls the  incoming and outgoing packets.
+
+    By-default the iptables is running without any rules, we can create, add, edit rules into it.
+
+Block ip   :  # iptables -A INPUT -s  192.168.1.10  -j  DROP
+
+Unblock Ip :  # iptables -D INPUT -s  192.168.1.10  -j  DROP
+
+/etc/init.d/iptables start
+-----------------------------------------------
+
+21. what is PV and VG and LV
+
+-----------------------------------------------------
+
+22. What is ICMP protocol 
+
+>>> The Internet Control Message Protocol (ICMP) is a supporting protocol
+    to send error messages and operational information indicating,
+    for example, that a requested service is not available or that a host or router could not be reached.
+--------------------------------------------------------------------------------------------
+23. LINUX boot process
+
+>>>1. BIOS : BIOS stands for Basic Input/Output System, executes the boot loader program. 
+             It looks for boot loader in floppy, cd-rom, or hard drive. So, in simple terms BIOS 
+             loads and executes the MBR boot loader.
+
+>>>2. MBR : MBR stands for Master Boot Record, It is located in the 1st sector of the bootable disk.
+            Typically /dev/hda, or /dev/sda, So, in simple terms MBR loads and executes the GRUB boot loader
+
+>>>3. GRUB : GRUB stands for Grand Unified Bootloader., GRUB displays a splash screen, waits for few seconds,
+             if you don’t enter anything, it loads the default kernel image as specified in the grub configuration file.
+             Grub configuration file is /boot/grub/grub.conf, So, in simple terms GRUB just loads and executes Kernel and initrd images.
+
+>>>4. Kernel : Mounts the root file system, Kernel executes the /sbin/init program
+
+>>>5. Init : Looks at the /etc/inittab file to decide the Linux run level. 
+
+>>>6. Runlevel programs : Depending on your default init level setting, the system will 
+      execute the programs from one of the following directories.
+
+/etc/inittab
+
+/etc/rc.d/rc0.d/
+---------------------------------------------------------------------------------------------
+24. what is inode
+
+>>> Inode is a simple Data structure, Which contains files metadat information like, Size,
+    owner id, group id, number of blocks, last modified, last accesed, last changed etc
+    
+----------------------------------------------------------------------------------------------
+
+25. What is Raid ??
+
+>>>  
+RAID : Redundant Array of Independent Disk, Raid is used to prevent Data loss
+
+Datas are copied into multiple disk so that if there is disk failure data will not be lossed
+
+There are some levels in RAID
+
+RAID 0 – striping
+RAID 1 – mirroring
+RAID 5 – striping with parity
+
+
+RAID 0 offers no redundancy and instead uses striping, i.e., data is split across all the drives.
+       This means RAID 0 offers no fault tolerance; if any of the        constituent drives fails, the RAID unit fails.
+
+RAID 1 offers redundancy through mirroring, i.e., data is written identically to two drives.
+------------------------------------------------------------------------------------------
+
+26 . What are IPv4 and IPv6? Who manages these?
+
+>>> IPv4 and IPv6 are the versions of Internet Protocol which stands 
+    for Version4 and Version6 respectively.
+
+>>> IPv4 : IPv4 is a 32 bit numeric representation of devices over
+    Internet, most widely used till date. It supports upto 4.3 billion
+    (4,300,000,000) unique IP addresses. 
+
+>>>>IPv6 : IPv6 is a 128 bit numeric representation of devices over
+    Internet. It supports as much as 340 trillion, trillion, trillion
+      (340,000,000,000,000,000,000,000,000,000,000,000,000) unique IP
+    address. This is sufficient to provide more than a billion of IP
+    addresses to every human being on earth.
+---------------------------------------------------------------------------------------------
+
+27. What is POP3?
+
+>>> POP3 stands for Post Office Protocol Version3 (Current Version).
+    It is responsible for accessing the mail service on a client machine.
+     POP3 works in two modes – Delete Mode and Keep Mode.
+
+-->>Delete Mode: A mail is deleted from the mailbox after successful retrieval.
+-->>Keep Mode: The Mail remains Intact in the mailbox after successful retrieval.
+
+POP is a protocol which listens on port 110
+-----------------------------------------------------------------------------
+28. What is the yum repository
+
+>>>YUM Repositories are warehouses of Linux software (RPM package files). 
+>>>Yum fetches packages from repository and install packages
+
+--------------------------------------------------------------------------
+
+
+29. Kernel : 
+
+check kernel version
+uname  -a - Type of  unix OS
+uname  -r - display kernel name	        
+uname  -m - display OS architecture
+
+>>> A kernel is the central part of an operating system. It manages
+>>>the tasks of the computer and the hardware - most notably memory and CPU time. 
+
+---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+ddinesh@innover.com 
