@@ -1,0 +1,75 @@
+1. VPC
+
+VPC - Virtual Private Cloud
+
+• VPC is a virtual private cloud, Private cloud itself says everythig
+• We Can Create /Configure Our own newtwork
+• So that we can deploy our EC2 instance in that private network.
+• Can Create own security group to our VPC
+
+Region = Asia Pacific 
+Availablity Zone = ap-south-1a, ap-south-1b etc
+• Availability Zone = Data center
+
+====================================================================
+
+
+2. S3 
+
+If website contains data like logo, images, videos etc it must load. We can pull it from S3 Bucket
+It load and pull from S3 bucket URL and provides output
+	
+• Once created S3 bucket we will get url we can use it for website to load video. Ex - hotstar streaming site 
+
+• ACL - Access control list.. Its like Sudo concept..who are all in this list can access to open S3 bucket
+
+	1. Create S3 Bucket
+	2. Give permission for bucket
+	3. Upload files and give persmission for files
+
+====================================================================
+
+3. EFS 
+
+• EFS is Elastic File System
+
+• EFS is SSD based managed network file system which automatically expand and shrinks based on your amount of data
+
+• Multiple EC2 instance can access the same data via NFS client
+
+• EFS is suitable for large amount of DATA
+
+• EFS is costly than S3
+
+STEPS
+
+1. Create EFS, It will ask for VPC ID, Just give VPC of CloudIq, Or TATA etc depending upon Environment
+2. GO inside EFS name created ==> Network => From there get see Security groups ID. [EFS Security Group ID]
+3. Now GO to EC2 instance, Just tag/Add EFS Security id. 
+
+Server 1 : Create Directory EG : love [Make sure come out of DIR and mount]
+
+# yum -y install nfs-utils
+# sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-1b426263.efs.us-east-2.amazonaws.com:/ /home/ec2-user/love
+
+Server 2 : Create Directory EG : marriage [[Make sure come out of DIR and mount]]
+
+# yum -y install nfs-utils
+# sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-1b426263.efs.us-east-2.amazonaws.com:/ /home/ec2-user/marriage
+
+Result : Now Check whatever ur creating inside Server 1 love directory it will reflect in server 2 marriage directory
+
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-1b426263.efs.us-east-2.amazonaws.com:/ /home/ec2-user/baby
+
+
+
+
+
+
+
+
+
+
+
+
+
