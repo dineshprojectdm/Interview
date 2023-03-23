@@ -1,0 +1,90 @@
+Port Numbers:
+
+DNS 53
+
+DHCP 67 68   - 67 server  68 -client
+
+FTP 20 21
+
+HTTP 80 443
+
+NFS 2049
+
+ssh 22
+
+SMTP 25
+
+LDAP 389
+
+POP3 110
+
+IMAP 142
+
+IMPAS 993
+
+
+SNMP 161
+
+
+SAMBA 139
+
+
+TLENT 23
+
+
+NETBIOS 139
+
+SSL 443
+
+MYSQL 3306
+
+SQUID 3128
+
+
+(DHCP) Dynamic Host Configuration Protocol  - is a network protocol for "assigning" 
+dynamic IP addresses to a computer in a network. It ll automatically allot IP for newwly joined system.
+
+
+(DNS) Domain Name System (or Service or Server), is an Internet service that "translates" domain
+names into IP addresses. Because domain names are alphabetic, they're easier to remember. ...
+Every time you use a domain name, therefore, a DNS service must translate the name into the corresponding
+IP address.
+
+(FTP) File Transfer Protocol (FTP) it is a standard Internet protocol for "transmitting" files between
+a client and server on a computer network over TCP/IP connections. Using FTP, a client can upload,
+download, delete, rename, move and copy files on a server.
+
+(TCP/IP) - a set of rules that governs the connection of computer systems to the Internet.
+
+
+OSI LAYERS
+
+APPLICATION LAYER ---- SSH ,HTTP, FTP
+
+PRESENTATION LAYES
+
+SESSION LAYER
+
+TRANSPORT LAYER --- UDP TCP
+
+NETWORK LAYER-- ROUTERS SWITCH , IP
+
+DATALINK LAYER-- NIC HUB SWITCH MAC
+
+PHYSICAL LAYER -- BASIC HARDWARE CABLES
+
+
+
+
+IP ADDRESS
+
+CLASS A 1 126
+
+CLASS B 128 191
+
+CLASS C 192 223
+
+CLASS D 224 239
+
+CLASS E 240 255
+
