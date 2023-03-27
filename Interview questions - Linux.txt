@@ -155,7 +155,7 @@ In VMware I will check in VM console
 >>> Steps for Keygen
 
 # ssh-keygen
-# ssh-copy-id  -i  /root/.ssh/id_rsa.pub   192.168.81.20
+# ssh-copy-id  -i  /root/.ssh/id_rsa.pub  username@77.134.54.101 -p 6576555
 -----------------------------------------------------------
 
 14. How do you create YUM Repository
