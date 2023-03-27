@@ -58,23 +58,33 @@ etc/init.d/rc3.d
 
 >>> There are some steps to create LV 1st I will the
 
-    1. pvcreate   /dev/hdb
-    2. pvs
-    3. vgcreate sky4GBvg(new vgname)  /dev/hdb
-    4. vgs
-    5. lvcreate  sky4GBvg(VG name) -L 4GB -n sky4GBlv(New LV name)
-    6. lvs or lvdisplay
-    7. mkfs.ext3 /dev/sky4GBvg/sky4GBlv(LV name) -  [Formatting]
-    8. mount /dev/sky4GBvg/sky4GBlv   /sky 
-    9. cat /etc/fstab
-    10.vi etc/fstab  
-    11.df -h - [Mounted]
+1. pvcreate   /dev/sda1
+
+2. pvs
+
+3. vgcreate VGNAME  /dev/sda1
+
+4. vgs
+
+5. lvcreate  VGName -L 4GB -n LVName
+
+6. lvs or lvdisplay
+
+7. mkfs.ext3 /dev/VGName/LVName -  [Formatting file system version ext3, ext4, xfs]
+
+8. mkdir /Application [Creating dir]
+
+9. mount dev/VGName/LVNam  /Application  [Mounting LV to /Application dir]
+
+10 vi etc/fstab  [put Entry in this for permanent mount]
+
+11. df -h
 
 --------------------------------------------------
 3.How will you add a user and How will add a user to group
 
 >> # useradd username
->> # usermod –a -G groupname username  
+>> # usermod â€“a -G groupname username  
 --------------------------------------------------
 
 4. What are the fields of /etc/passwd  file
@@ -94,7 +104,7 @@ etc/init.d/rc3.d
 --------------------------------------------------
 7. How to add user to a Group
 
->># usermod –a -G groupname username 
+>># usermod â€“a -G groupname username 
 --------------------------------------------------
 8. How to Lock a user
 
@@ -237,7 +247,7 @@ Unblock Ip :  # iptables -D INPUT -s  192.168.1.10  -j  DROP
             Typically /dev/hda, or /dev/sda, So, in simple terms MBR loads and executes the GRUB boot loader
 
 >>>3. GRUB : GRUB stands for Grand Unified Bootloader., GRUB displays a splash screen, waits for few seconds,
-             if you don’t enter anything, it loads the default kernel image as specified in the grub configuration file.
+             if you donâ€™t enter anything, it loads the default kernel image as specified in the grub configuration file.
              Grub configuration file is /boot/grub/grub.conf, So, in simple terms GRUB just loads and executes Kernel and initrd images.
 
 >>>4. Kernel : Mounts the root file system, Kernel executes the /sbin/init program
@@ -267,9 +277,9 @@ Datas are copied into multiple disk so that if there is disk failure data will n
 
 There are some levels in RAID
 
-RAID 0 – striping
-RAID 1 – mirroring
-RAID 5 – striping with parity
+RAID 0 â€“ striping
+RAID 1 â€“ mirroring
+RAID 5 â€“ striping with parity
 
 
 RAID 0 offers no redundancy and instead uses striping, i.e., data is split across all the drives.
@@ -298,7 +308,7 @@ RAID 1 offers redundancy through mirroring, i.e., data is written identically to
 
 >>> POP3 stands for Post Office Protocol Version3 (Current Version).
     It is responsible for accessing the mail service on a client machine.
-     POP3 works in two modes – Delete Mode and Keep Mode.
+     POP3 works in two modes â€“ Delete Mode and Keep Mode.
 
 -->>Delete Mode: A mail is deleted from the mailbox after successful retrieval.
 -->>Keep Mode: The Mail remains Intact in the mailbox after successful retrieval.
@@ -307,7 +317,7 @@ POP is a protocol which listens on port 110
 -----------------------------------------------------------------------------
 28. What is the yum repository
 
->>>YUM Repositories are warehouses of Linux software (RPM package files). 
+>>>YUM RepositoriesÂ are warehouses of Linux software (RPM package files). 
 >>>Yum fetches packages from repository and install packages
 
 --------------------------------------------------------------------------
