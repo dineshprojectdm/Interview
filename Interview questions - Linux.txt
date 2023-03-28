@@ -221,8 +221,13 @@ user accounts, Groups, Computer and networks resourses
     By-default the iptables is running without any rules, we can create, add, edit rules into it.
 
 Block ip   :  # iptables -A INPUT -s  192.168.1.10  -j  DROP
-
 Unblock Ip :  # iptables -D INPUT -s  192.168.1.10  -j  DROP
+
+Blocking SSH and ip : iptables  -A INPUT -p  tcp --dport  ssh  -s  192.168.1.10  -j  DROP
+UnBlocking SSH and ip : iptables  -D INPUT -p  tcp --dport  ssh  -s  192.168.1.10  -j  DROP
+
+# firewall-cmd --zone=public --add-port=80/tcp
+#	firewall-cmd --zone=public --add-port=80/tcp --permanent
 
 /etc/init.d/iptables start
 -----------------------------------------------
