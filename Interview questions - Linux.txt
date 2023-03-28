@@ -218,18 +218,31 @@ user accounts, Groups, Computer and networks resourses
 
 >>> Iptables is like firewall for Linux. It controls the  incoming and outgoing packets.
 
-    By-default the iptables is running without any rules, we can create, add, edit rules into it.
+By-default the iptables is running without any rules, we can create, add, edit rules into it.
+/etc/init.d/iptables start
 
-Block ip   :  # iptables -A INPUT -s  192.168.1.10  -j  DROP
-Unblock Ip :  # iptables -D INPUT -s  192.168.1.10  -j  DROP
+# iptables -A INPUT -s  192.168.1.10  -j  DROP     - [Block ip]
+# iptables -D INPUT -s  192.168.1.10  -j  DROP     - [Unblock Ip]
 
-Blocking SSH and ip : iptables  -A INPUT -p  tcp --dport  ssh  -s  192.168.1.10  -j  DROP
-UnBlocking SSH and ip : iptables  -D INPUT -p  tcp --dport  ssh  -s  192.168.1.10  -j  DROP
+# iptables  -A INPUT -p  tcp --dport  ssh  -s  192.168.1.10  -j  DROP  - [Blocking SSH and ip]
+# iptables  -D INPUT -p  tcp --dport  ssh  -s  192.168.1.10  -j  DROP  - [UnBlocking SSH and ip]
 
-# firewall-cmd --zone=public --add-port=80/tcp
+# iptables  -A INPUT -p  tcp --dport  ssh  -j  DROP  - [Blocking SSH]
+
+A - APPEND,  D - DELETE  -p - Protocol
+------------------------
+RHEL 7,8,9 - firewall-cmd
+
+# firewall-cmd
+--zone=public --add-port=80/tcp    - [Block - Http]
 #	firewall-cmd --zone=public --add-port=80/tcp --permanent
 
-/etc/init.d/iptables start
+firewall-cmd --add-port=22/tcp --permanent     - [Block SSH ]
+UnBlock SSH : firewall-cmd --remove-port=22/tcp --permanent
+
+# firewall-cmd --list-all-zones
+
+
 -----------------------------------------------
 
 21. what is PV and VG and LV
