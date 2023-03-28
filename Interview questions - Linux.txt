@@ -234,7 +234,7 @@ A - APPEND,  D - DELETE  -p - Protocol
 RHEL 7,8,9 - firewall-cmd
 
 # firewall-cmd --zone=public --add-port=80/tcp    - [Block - Http]
-#	firewall-cmd --zone=public --add-port=80/tcp --permanent
+# firewall-cmd --zone=public --add-port=80/tcp --permanent
 
 # firewall-cmd --add-port=22/tcp --permanent     - [Block SSH ]
 # firewall-cmd --remove-port=22/tcp --permanent - [UnBlock SSH]
